@@ -1,0 +1,67 @@
+def remote_jar(name, url, hash, deps = []):
+    remote_file(
+        name = name + "-source",
+        out = name + "-source.jar",
+        url = url,
+        sha1 = hash
+    )
+    prebuilt_jar(
+        name = name,
+        binary_jar = ":" + name + "-source",
+        deps=deps,
+        visibility=["PUBLIC"]
+    )
+
+def init_scala():
+    remote_jar(
+        "scala-library",
+        "mvn:org.scala-lang:scala-library:jar:2.12.4",
+        "7663f74ef944453c86cc7e6597ed33e9281f6412"
+    )
+    remote_jar(
+        "scala-reflect",
+        "mvn:org.scala-lang:scala-reflect:jar:2.12.4",
+        "2df9e6015b97e35464edddd20eec392bb54fab11",
+        ["//:scala-library"]
+    )
+    remote_jar(
+        "scalactic",
+        "mvn:org.scalactic:scalactic_2.12:jar:3.2.0-SNAP10",
+        "1f877bb26bc7ce3881fd7363932be4cc861bf829",
+        ["//:scala-library"]
+    )
+    remote_jar(
+        "java-hamcrest",
+        "mvn:org.hamcrest:java-hamcrest:jar:2.0.0.0",
+        "0f1c8853ade0ecf707f5a261c830e98893983813"
+    )
+    remote_jar(
+        "junit",
+        "mvn:junit:junit:jar:4.12",
+        "2973d150c0dc1fefe998f834810d68f278ea58ec",
+        ["//:java-hamcrest"]
+    )
+    remote_jar(
+        "scala-xml",
+        "mvn:org.scala-lang.modules:scala-xml_2.12:jar:1.0.6",
+        "e22de3366a698a9f744106fb6dda4335838cf6a7",
+        ["//:scala-library"]
+    )
+    remote_jar(
+        "scalatest",
+        "mvn:org.scalatest:scalatest_2.12:jar:3.2.0-SNAP10",
+        "4d9868f3d2b4c019d66b6c7fa22a52637d9df74f",
+        ["//:scala-xml", "//:junit"]
+    )
+    remote_jar(
+        "scala-compiler-lib",
+        "mvn:org.scala-lang:scala-compiler:jar:2.12.4",
+        "c69c0ee397050d7fa30cfe490471388d30c03bd0",
+        ["//:scala-library", "//:scala-reflect"]
+    )
+    java_binary(
+        name="scala-compiler",
+        main_class="scala.tools.nsc.Main",
+        deps=[":scala-compiler-lib"],
+        visibility=["PUBLIC"]
+    )
