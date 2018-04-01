@@ -71,7 +71,7 @@ class RegexMatchingAgent {
         val p = Pattern.compile(regex, Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE)
 
         // Get a list of all matches
-        val mainMatches = text.matches(p)
+        val mainMatches = text.`match`(p)
 
         // Return no locations if we can't even match the string
         if (mainMatches.size == 0) return null

@@ -1,15 +1,15 @@
 package com.linguistic.patterson
 
-import com.linguistic.patterson.agents.SentenceParsingAgent
-import com.linguistic.patterson.models.Sentence
+import com.linguistic.patterson.agents.{GrammarPatternAgent, SentenceParsingAgent}
+import com.linguistic.patterson.models.{GrammarPattern, Sentence}
 
 class Patterson {
     private val client = new NLPClient
-    private val sentenceParser = new SentenceParsingAgent(client)
-    private val matchReducer = null
+    private val spa = new SentenceParsingAgent(client)
+    private val gpa = new GrammarPatternAgent(Map[String, GrammarPattern]())
 
-    def matchGrammar(text: String): List[Sentence] = {
-        val sentences = this.sentenceParser.parseMulti(text)
-        return sentences.map(s ⇒ this.matchReducer)
+    def matchGrammar(text: String): List[List[GrammarPattern]] = {
+        val sentences = this.spa.parseMulti(text)
+        return sentences.map(s ⇒ this.gpa.getMatchedPatterns(s))
     }
 }

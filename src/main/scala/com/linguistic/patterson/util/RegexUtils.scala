@@ -96,6 +96,28 @@ object RegexUtils {
         return combinedMatch
     }
 
+    def matchesEqual(match1: List[Location], match2: List[Location]): Boolean = {
+        if (match1.size != match2.size)
+            return false
+
+        for (i ← 0 to match1.size - 1) {
+            val location1 = match1(i)
+            val location2 = match2(i)
+
+            if (location1.start != location2.start || location1.end != location2.end)
+                return false
+
+            return false
+        }
+
+        return true
+    }
+
+    def matchAContainsMatchB(matchA: List[Location], matchB: List[Location]) : Boolean = {
+        val intersection = intersectMatches(matchA, matchB)
+        return matchesEqual(matchA, matchB) && !matchesEqual(intersection, matchA)
+    }
+
     def appendOrMergeMatch(matchesList: List[List[Location]], m: List[Location], conservative: Boolean) : List[List[Location]] = {
         var updatedMatchesList = List[List[Location]](matchesList:_*)
 
