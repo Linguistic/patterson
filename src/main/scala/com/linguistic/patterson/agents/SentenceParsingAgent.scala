@@ -48,7 +48,7 @@ class SentenceParsingAgent(client: NLPClient) {
         var sentences = List[String]()
         var currentSentence = splitText(0).replaceAll("^\\s+", "")
 
-        for (i ← 1 to splitText.length) {
+        for (i ← 1 to splitText.length - 1) {
             val chunk = splitText(i).replaceAll("^\\s+", "")
 
             if (chunk.trim.length > 0 && SENTENCE_PUNCT_MATCH_REGEX.matcher(chunk).matches()) {

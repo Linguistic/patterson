@@ -1,0 +1,15 @@
+---
+id: yuelaiyue
+description: >
+  越来越 (yuèláiyuè) is used frequently in Chinese to express that some quality or state is increasing with time, and
+  is often translated into English as "more and more." This is the simple form of this pattern, which uses 来, but
+  there is also a more complex one (which uses two different adjectives/verbs).
+regex: (越来越)[^了]+(了)
+structures:
+  - Subj. + 越来越 + Adj. + 了
+  - Subj. + 越来越 + Verb + 了
+refs:
+  - asl
+examples:
+  - - 天气越来越冷了。
+    - The weather is getting colder and colder.

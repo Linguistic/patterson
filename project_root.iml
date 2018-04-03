@@ -3,12 +3,14 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.buckd" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/buck-out" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.buckd" />
+      <excludeFolder url="file://$MODULE_DIR$/.git" />
+      <excludeFolder url="file://$MODULE_DIR$/buck-out" />
+      <excludeFolder url="file://$MODULE_DIR$/resources" />
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="//:scala-compiler-lib" scope="COMPILE" level="project" />
-    <orderEntry type="module" module-name="src_main" scope="COMPILE" />
+    <orderEntry type="library" name="//:scala-compiler-lib" level="project" />
+    <orderEntry type="module" module-name="src_main" />
   </component>
 </module>

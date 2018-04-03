@@ -12,6 +12,9 @@ def remote_jar(name, url, hash, deps = []):
         visibility=["PUBLIC"]
     )
 
+def export_public_file(name):
+    export_file(name = name, visibility = ["PUBLIC"])
+
 def init_scala():
     remote_jar(
         "scala-library",

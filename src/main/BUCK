@@ -1,7 +1,18 @@
 scala_library(
     name = "patterson-lib",
     srcs = glob(["**/*.java", "**/*.scala"]),
-    deps = ['//:corenlp'],
+    deps = [
+        '//:commons-lang3',
+        '//:corenlp',
+        '//:corenlp-english',
+        '//:corenlp-chinese',
+        '//:jackson-annotations',
+        '//:jackson-databind',
+        '//:jackson-core',
+        '//:jackson-dataformat-yaml',
+        '//:snakeyaml'
+    ],
+    resources = ['//resources:config', '//resources:library'],
     visibility = ["PUBLIC"]
 )
 

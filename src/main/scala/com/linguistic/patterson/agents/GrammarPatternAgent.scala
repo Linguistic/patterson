@@ -4,11 +4,13 @@ import com.linguistic.patterson.models.{GrammarPattern, Sentence}
 import com.linguistic.patterson.util.RegexUtils
 import com.linguistic.patterson.util.RegexUtils.Location
 
+import scala.collection.mutable
+
 class GrammarPatternAgent(grammarPatternMap: Map[String, GrammarPattern]) {
     def getMatchedPatterns(sentence: Sentence): List[GrammarPattern] = {
-        val matches = Map[String, List[List[Location]]]()
+        val matches = mutable.Map[String, List[List[Location]]]()
         var grammarMatches = List[GrammarPattern]()
-        val filteredMatchesMap = Map[String, List[List[Location]]]()
+        val filteredMatchesMap = mutable.Map[String, List[List[Location]]]()
 
         // Loop through each stored grammar pattern and see the string contains the pattern
         this.grammarPatternMap.foreach(entry ⇒ {
