@@ -75,7 +75,7 @@ object JacksonPOJO {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    class ParsedGrammarData() {
+    class YAMLGrammarData() {
         private var id: String = _
         private var description: String = _
         private var regex: String = _
@@ -95,5 +95,19 @@ object JacksonPOJO {
         def setRefs(refs: Array[String]) = this.refs = refs
         def getExamples(): Array[Array[String]] = this.examples
         def setExamples(examples: Array[Array[String]]): Unit = this.examples = examples
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    class YAMLReference() {
+        private var name: String = _
+        private var url: String = _
+        private var id: String = _
+
+        def getId: String = this.id
+        def setId(id: String): Unit = this.id = id
+        def getName: String = this.name
+        def setName(name: String): Unit = this.name = name
+        def getUrl: String = this.url
+        def setUrl(url: String): Unit = this.url = url
     }
 }
