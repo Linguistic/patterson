@@ -9,7 +9,7 @@ object StringUtils {
             var matches = List[String]()
             while (matcher.find())
                 matches :+= matcher.group()
-            return if (matches.size > 0) matches else null
+            if (matches.nonEmpty) matches else null
         }
     }
 

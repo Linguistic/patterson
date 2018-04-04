@@ -1,6 +1,12 @@
 package com.linguistic.patterson.util
 
+import java.util.regex.Pattern
+
+import com.linguistic.patterson.models.corenlp.Token
+
 import scala.collection.mutable
+
+import com.linguistic.patterson.util.StringUtils._
 
 object RegexUtils {
     case class Location(var start: Int, var end: Int)
@@ -12,7 +18,7 @@ object RegexUtils {
         val sortedLocations = List(locations.sortWith((t1, t2) ⇒ (t1.start - t2.start) < 0):_*)
 
         var combinedIndices = List[Location]()
-        var currentLocation = sortedLocations(0)
+        var currentLocation = sortedLocations.head
 
         for (location ← sortedLocations) {
             if (location.start <= currentLocation.end && location.end > currentLocation.end)
@@ -24,8 +30,7 @@ object RegexUtils {
         }
 
         combinedIndices :+= currentLocation
-
-        return combinedIndices
+        combinedIndices
     }
 
     def locationsOverlap(location1: Location, location2: Location): Boolean = {
@@ -160,6 +165,23 @@ object RegexUtils {
             }
         }
 
-        return if (mergedMatches.length > 0) mergedMatches else null
+        if (mergedMatches.nonEmpty) mergedMatches else null
     }
+
+//    def locFromToken(token: Token, matchCharsStr: String = null) : Location = {
+//        val baseLocation = Location(token.beginPosition, token.endPosition)
+//
+//        if (matchCharsStr.isEmpty)
+//            return baseLocation
+//
+//        val matchData = token.word.`match`(Pattern.compile(s"[${matchCharsStr}]+", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE))
+//
+//        if (matchData == null)
+//            return null
+//
+//        baseLocation.start += matchData.index
+//        baseLocation.end = baseLocation.start + matchData[0].length;
+//
+//        return baseLocation;
+//    };
 }

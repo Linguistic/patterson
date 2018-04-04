@@ -6,29 +6,6 @@ import com.linguistic.patterson.util.StringUtils._
 import com.linguistic.patterson.util.RegexUtils._
 
 class RegexMatchingAgent {
-    private def combineAdjacentLocations(locations: List[Location]): List[Location] = {
-        if (locations.size <= 1)
-            return locations
-
-        val sortedLocations = List(locations.sortWith((t1, t2) ⇒ (t1.start - t2.start) < 0):_*)
-
-        var combinedIndices = List[Location]()
-        var currentLocation = sortedLocations(0)
-
-        for (location ← sortedLocations) {
-            if (location.start <= currentLocation.end && location.end > currentLocation.end)
-                currentLocation.end = location.end
-            else if (location.start < currentLocation.end) {
-                combinedIndices :+= currentLocation
-                currentLocation = location.copy()
-            }
-        }
-
-        combinedIndices :+= currentLocation
-
-        return combinedIndices
-    }
-
     /**
       * Return the locations (start/end points) of each group in a substring given a regex pattern
       *
@@ -43,7 +20,7 @@ class RegexMatchingAgent {
 
         var locations = List[Location]()
 
-        if (m != null) {
+        if (m) {
             for (i ← 1 to matcher.groupCount()) {
                 val group = matcher.group(i)
 
@@ -51,12 +28,12 @@ class RegexMatchingAgent {
                     val start = matcher.start(i) + startIndex
                     val end = start + group.length
 
-                    locations :+= new Location(start, end)
+                    locations :+= Location(start, end)
                 }
             }
         }
 
-        return locations
+        locations
     }
 
     /**
@@ -74,7 +51,7 @@ class RegexMatchingAgent {
         val mainMatches = text.`match`(p)
 
         // Return no locations if we can't even match the string
-        if (mainMatches.size == 0) return null
+        if (mainMatches.isEmpty) return null
 
         var matchResults = List[List[Location]]()
         var lastMatchEndIndex = 0
@@ -93,6 +70,6 @@ class RegexMatchingAgent {
             lastMatchEndIndex = innerMatchStartPos + innerMatchStr.length
         }
 
-        return matchResults
+        matchResults
     }
 }
