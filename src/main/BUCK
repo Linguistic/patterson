@@ -10,7 +10,7 @@ scala_library(
         '//:jackson-dataformat-yaml',
         '//:snakeyaml'
     ],
-    resources = ['//resources:config', '//resources:library'],
+    resources = ['//:library'],
     visibility = ["PUBLIC"]
 )
 

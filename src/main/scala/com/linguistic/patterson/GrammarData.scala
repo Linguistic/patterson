@@ -5,7 +5,6 @@ import java.io._
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.linguistic.patterson.models.local.{ExampleSentence, GrammarPattern, Reference}
-import com.linguistic.patterson.models.{GrammarPattern, Reference}
 import com.linguistic.patterson.util.JacksonPOJO.ParsedGrammarData
 
 class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
@@ -13,13 +12,13 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
 
     var patterns = Map[String, GrammarPattern]()
 
-    println(getFilesInResourceDirectory("/resources/library/en/zh/"))
+    println(getFilesInResourceDirectory("/library/en/zh/"))
 
     try {
         val data : ParsedGrammarData =
             mapper.readValue(
                 new BufferedInputStream(
-                    this.getClass.getResourceAsStream("/resources/library/en/zh/yuelaiyue.yml")
+                    this.getClass.getResourceAsStream("/library/en/zh/yuelaiyue.yml")
                 ),
             classOf[ParsedGrammarData])
 

@@ -6,7 +6,6 @@ import java.net.{HttpURLConnection, URL, URLEncoder}
 import com.fasterxml.jackson.core.JsonFactory
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.linguistic.patterson.models.corenlp.{Dependency, Document, Sentence, Token}
-import com.linguistic.patterson.models.{Document, Sentence, Token}
 import com.linguistic.patterson.util.JacksonPOJO._
 
 class RemoteClient(host: String, language: String) extends TClient {

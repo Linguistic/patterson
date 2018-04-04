@@ -2,7 +2,6 @@ package com.linguistic.patterson.agents
 
 import java.util.regex.Pattern
 
-import com.linguistic.patterson.models.Token
 import com.linguistic.patterson.clients.TClient
 import com.linguistic.patterson.models.corenlp.{Sentence, Token}
 

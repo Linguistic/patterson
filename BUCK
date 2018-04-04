@@ -1,9 +1,10 @@
 include_defs('//DEFS')
 
 #################
-#     SCALA     #
+#     SETUP     #
 #################
 init_scala()
+export_public_file("library")
 
 ########################
 #     DEPENDENCIES     #
