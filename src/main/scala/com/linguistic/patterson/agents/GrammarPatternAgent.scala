@@ -1,6 +1,7 @@
 package com.linguistic.patterson.agents
 
-import com.linguistic.patterson.models.{GrammarPattern, Sentence}
+import com.linguistic.patterson.models.corenlp.Sentence
+import com.linguistic.patterson.models.local.GrammarPattern
 import com.linguistic.patterson.util.RegexUtils
 import com.linguistic.patterson.util.RegexUtils.Location
 

@@ -2,8 +2,7 @@ package com.linguistic.patterson.util
 
 import java.util.regex.Pattern
 
-import com.linguistic.patterson.models.Token
-
+import com.linguistic.patterson.models.corenlp.Token
 import com.linguistic.patterson.util.StringUtils._
 
 object TokenFilters {

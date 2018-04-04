@@ -11,8 +11,6 @@ init_scala()
 
 # Stanford CoreNLP
 remote_jar("corenlp", "mvn:edu.stanford.nlp:stanford-corenlp:jar:3.9.1", "eaec753808f3c214755cbf1b1e57bb58bc448309")
-remote_jar("corenlp-english", "https://nlp.stanford.edu/software/stanford-english-corenlp-2018-02-27-models.jar", "7ac4758787c20d74f59664c24eb4995c0fd42507")
-remote_jar("corenlp-chinese", "https://nlp.stanford.edu/software/stanford-chinese-corenlp-2018-02-27-models.jar", "5ebbace3950c5966aca6fa9788c7f2ff82ef6069")
 
 # Jackson & YAML
 remote_jar("jackson-annotations", "mvn:com.fasterxml.jackson.core:jackson-annotations:jar:2.9.5", "9056ec9db21c57d43219a84bb18c129ae51c6a5d")

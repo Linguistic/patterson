@@ -1,4 +1,4 @@
-package com.linguistic.patterson.models
+package com.linguistic.patterson.models.corenlp
 
 import edu.stanford.nlp.ling.CoreLabel
 

@@ -1,10 +1,10 @@
 package com.linguistic.patterson
 
 import com.linguistic.patterson.agents.{GrammarPatternAgent, SentenceParsingAgent}
-import com.linguistic.patterson.models.GrammarPattern
+import com.linguistic.patterson.clients.TClient
+import com.linguistic.patterson.models.local.GrammarPattern
 
-class Patterson {
-    private val client = new NLPClient
+class Patterson(client: TClient) {
     private val grammarData = new GrammarData("y", "n")
     private val spa = new SentenceParsingAgent(client)
     private val gpa = new GrammarPatternAgent(grammarData.patterns)

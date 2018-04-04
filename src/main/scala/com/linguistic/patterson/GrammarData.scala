@@ -1,38 +1,19 @@
 package com.linguistic.patterson
 
-import java.io.{BufferedInputStream, File, FileInputStream}
+import java.io._
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.linguistic.patterson.models.{ExampleSentence, GrammarPattern, Reference}
-import org.apache.commons.lang3.builder.{ReflectionToStringBuilder, ToStringStyle}
-
-class ParsedGrammarData() {
-    private var id: String = _
-    private var description: String = _
-    private var regex: String = _
-    private var structures: Array[String] = _
-    private var refs: Array[String] = _
-    private var examples: Array[Array[String]] = _
-
-    def getId(): String = this.id
-    def setId(id: String): Unit = this.id = id
-    def getDescription(): String = this.description
-    def setDescription(description: String): Unit = this.description = description
-    def getRegex(): String = this.regex
-    def setRegex(regex: String): Unit = this.regex = regex
-    def getStructures(): Array[String] = this.structures
-    def setStructures(structures: Array[String]) = this.structures = structures
-    def getRefs(): Array[String] = this.refs
-    def setRefs(refs: Array[String]) = this.refs = refs
-    def getExamples(): Array[Array[String]] = this.examples
-    def setExamples(examples: Array[Array[String]]): Unit = this.examples = examples
-}
+import com.linguistic.patterson.models.local.{ExampleSentence, GrammarPattern, Reference}
+import com.linguistic.patterson.models.{GrammarPattern, Reference}
+import com.linguistic.patterson.util.JacksonPOJO.ParsedGrammarData
 
 class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
     private val mapper = new ObjectMapper(new YAMLFactory())
 
     var patterns = Map[String, GrammarPattern]()
+
+    println(getFilesInResourceDirectory("/resources/library/en/zh/"))
 
     try {
         val data : ParsedGrammarData =
@@ -54,4 +35,26 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
         case e: Exception ⇒ e.printStackTrace()
     }
 
+    private def getFilesInResourceDirectory(dir: String): List[String] = {
+        var filenames = List[String]()
+
+        try {
+            val in = this.getClass.getResourceAsStream(dir)
+            val br = new BufferedReader(new InputStreamReader(in))
+
+            try {
+                Stream
+                    .continually(br.readLine)
+                    .takeWhile(_ != null)
+                    .foreach(println(_))
+            } catch {
+                case e ⇒ e.printStackTrace()
+            } finally {
+                if (in != null) in.close()
+                if (br != null) br.close()
+            }
+        }
+
+        return filenames
+    }
 }

@@ -1,6 +1,6 @@
 package com.linguistic.patterson.graph
 
-import com.linguistic.patterson.models.Token
+import com.linguistic.patterson.models.corenlp.Token
 import com.linguistic.patterson.util.TokenFilters._
 
 class Node(val filter: Token ⇒ Boolean = null, val edges: String = null) {

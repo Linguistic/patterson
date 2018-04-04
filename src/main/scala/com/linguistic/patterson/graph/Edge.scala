@@ -2,7 +2,7 @@ package com.linguistic.patterson.graph
 
 import java.util.regex.Pattern
 
-import com.linguistic.patterson.models.Token
+import com.linguistic.patterson.models.corenlp.Token
 
 object Edge {
     case class EdgeOptions(`type`: String)

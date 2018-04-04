@@ -1,6 +1,7 @@
-package com.linguistic.patterson.models
+package com.linguistic.patterson.models.local
 
 import com.linguistic.patterson.agents.RegexMatchingAgent
+import com.linguistic.patterson.models.corenlp.Sentence
 import com.linguistic.patterson.util.RegexUtils
 import com.linguistic.patterson.util.RegexUtils.Location
 

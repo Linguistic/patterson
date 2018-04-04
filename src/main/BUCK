@@ -4,8 +4,6 @@ scala_library(
     deps = [
         '//:commons-lang3',
         '//:corenlp',
-        '//:corenlp-english',
-        '//:corenlp-chinese',
         '//:jackson-annotations',
         '//:jackson-databind',
         '//:jackson-core',
