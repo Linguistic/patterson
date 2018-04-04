@@ -18,7 +18,7 @@ private object Document {
             .edgeListSorted()
             .asScala
             .map(e ⇒ Dependency(
-                dep = e.getRelation.toString(),
+                dep = e.getRelation.toString,
                 governor = e.getGovernor.index(),
                 dependent = e.getDependent.index()
             )).toList

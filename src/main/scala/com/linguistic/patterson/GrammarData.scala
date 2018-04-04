@@ -10,8 +10,8 @@ import com.linguistic.patterson.util.JacksonPOJO.{YAMLGrammarData, YAMLReference
 
 class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
     private val mapper = new ObjectMapper(new YAMLFactory())
-    private val grammarPaths = getGrammarFilesInResourceDirectory(s"library/${targetLanguage}/${sourceLanguage}/")
-    private val referenceStream = this.getClass.getResourceAsStream(s"/library/${targetLanguage}/${sourceLanguage}/_refs.yml")
+    private val grammarPaths = getGrammarFilesInResourceDirectory(s"library/$targetLanguage/$sourceLanguage/")
+    private val referenceStream = this.getClass.getResourceAsStream(s"/library/$targetLanguage/$sourceLanguage/_refs.yml")
 
     private var referenceMap = Map[String, Reference]()
 
@@ -23,7 +23,7 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
         })
     }
 
-    var patterns: Map[String, GrammarPattern] = this.readGrammarFiles()
+    val patterns: Map[String, GrammarPattern] = this.readGrammarFiles()
 
     private def readGrammarFiles(): Map[String, GrammarPattern] = {
         var patterns: Map[String, GrammarPattern] = Map[String, GrammarPattern]()
@@ -71,8 +71,8 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
                 // Make sure it's not the references file
                 !name.contains("_refs.yml") &&
                 // Make sure that it's not a directory
-                name(name.size - 1) != '/'
-            ) files :+= s"/${name}"
+                name(name.length - 1) != '/'
+            ) files :+= s"/$name"
         }
 
         files

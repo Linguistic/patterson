@@ -9,7 +9,7 @@ object GraphUtils {
         var matchLocations = List[List[Location]]()
 
         if (matchTree.matches(tokenTree))
-            matchLocations :+= combineAdjacentLocations(matchTree.getMatchLocs(tokenTree)));
+            matchLocations :+= combineAdjacentLocations(matchTree.getMatchLocs(tokenTree))
 
         for (dependentTree ← tokenTree.dependents) {
             val depMatchLocations = recursiveSearchTree(dependentTree, matchTree)

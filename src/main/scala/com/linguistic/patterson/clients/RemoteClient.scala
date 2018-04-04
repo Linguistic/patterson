@@ -10,10 +10,10 @@ import com.linguistic.patterson.util.JacksonPOJO._
 
 class RemoteClient(host: String, language: String) extends TClient {
     private val annotators = List("tokenize", "ssplit", "pos", "ner", "depparse")
+    private val query = URLEncoder.encode(s"""properties={"annotators": "${this.annotators.mkString(",")}"}&pipelineLanguage=${this.language}""", "UTF-8")
+    private val uri = s"""$host/?$query"""
 
     def parse(text: String): Document = {
-        val query = URLEncoder.encode(s"""properties={"annotators": "${this.annotators.mkString(",")}"}&pipelineLanguage=${this.language}""", "UTF-8")
-        val uri = s"""${host}/?${query}"""
         val url = new URL(uri)
         val con = url.openConnection.asInstanceOf[HttpURLConnection]
 

@@ -38,7 +38,7 @@ object RegexUtils {
         if (location1.start <= location2.start && location1.end > location2.start) return true
         // location2.end is inside of location1
         if (location1.start < location2.end && location1.end >= location2.end) return true
-        return false
+        false
     }
 
     def matchesOverlap(match1: List[Location], match2: List[Location]): Boolean = {
@@ -47,7 +47,7 @@ object RegexUtils {
             for (location2 ← match2)
                 if (locationsOverlap(location1, location2))
                     return true
-        return false
+        false
     }
 
     def intersectMatches(match1: List[Location], match2: List[Location]): List[Location] = {
@@ -56,21 +56,21 @@ object RegexUtils {
 
         var combinedMatch = List[Location]()
 
-        if (locationQueue.size == 0) return List[Location]()
+        if (locationQueue.isEmpty) return List[Location]()
 
         while (locationQueue.length > 1) {
             val currentLocation = locationQueue.dequeue()
             val head = locationQueue.head
 
             if (locationsOverlap(currentLocation, head)) {
-                combinedMatch :+= new Location(
+                combinedMatch :+= Location(
                     Math.max(currentLocation.start, head.start),
                     Math.min(currentLocation.end, head.end)
                 )
             }
         }
 
-        return combinedMatch
+        combinedMatch
     }
 
     def unionMatches(match1: List[Location], match2: List[Location]): List[Location] = {
@@ -79,14 +79,14 @@ object RegexUtils {
         var locationQueue = mutable.Queue(allLocations:_*)
         var combinedMatch = List[Location]()
 
-        if (locationQueue.size == 0) return List[Location]()
+        if (locationQueue.isEmpty) return List[Location]()
 
         while (locationQueue.length > 1) {
             val currentLocation = locationQueue.dequeue()
             val head = locationQueue.head
 
             if (locationsOverlap(currentLocation, head)) {
-                locationQueue(0) = new Location(
+                locationQueue(0) = Location(
                     Math.min(currentLocation.start, head.start),
                     Math.max(currentLocation.end, head.end)
                 )
@@ -97,15 +97,14 @@ object RegexUtils {
 
         combinedMatch :+= locationQueue.last
         locationQueue = locationQueue.dropRight(1)
-
-        return combinedMatch
+        combinedMatch
     }
 
     def matchesEqual(match1: List[Location], match2: List[Location]): Boolean = {
         if (match1.size != match2.size)
             return false
 
-        for (i ← 0 to match1.size - 1) {
+        for (i ← match1.indices) {
             val location1 = match1(i)
             val location2 = match2(i)
 
@@ -115,12 +114,11 @@ object RegexUtils {
             return false
         }
 
-        return true
+        true
     }
 
     def matchAContainsMatchB(matchA: List[Location], matchB: List[Location]) : Boolean = {
-        val intersection = intersectMatches(matchA, matchB)
-        return matchesEqual(matchA, matchB) && !matchesEqual(intersection, matchA)
+        matchesEqual(matchA, matchB) && !matchesEqual(intersectMatches(matchA, matchB), matchA)
     }
 
     def appendOrMergeMatch(matchesList: List[List[Location]], m: List[Location], conservative: Boolean) : List[List[Location]] = {
@@ -140,8 +138,7 @@ object RegexUtils {
         }
 
         updatedMatchesList :+= m
-
-        return updatedMatchesList
+        updatedMatchesList
     }
 
     /**

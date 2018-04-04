@@ -4,17 +4,19 @@ import java.util.regex.Pattern
 
 import com.linguistic.patterson.clients.TClient
 import com.linguistic.patterson.models.corenlp.{Sentence, Token}
+import com.linguistic.patterson.util.StringUtils._
 
 class SentenceParsingAgent(client: TClient) {
     private final val SENTENCE_SPLIT_REGEX_BASE : String = "[.](?!\\d)|[!?]+|[。]|[！？]+"
-    private final val SENTENCE_SPLIT_REGEX : Pattern = Pattern.compile(s"(${SENTENCE_SPLIT_REGEX_BASE})", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE)
-    private final val SENTENCE_PUNCT_MATCH_REGEX  : Pattern = Pattern.compile(s"^${SENTENCE_SPLIT_REGEX_BASE}$$", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE)
+    // TODO: split using THIS, not the string!!
+    private final val SENTENCE_SPLIT_REGEX: Pattern = Pattern.compile(s"($SENTENCE_SPLIT_REGEX_BASE)", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE)
+    private final val SENTENCE_PUNCT_MATCH_REGEX : Pattern = Pattern.compile(s"^$SENTENCE_SPLIT_REGEX_BASE$$", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE)
 
     def parse(text: String): Sentence = {
         val preprocessedText = text.replaceAll("\\s+", "")
         val parsedText = this.client.parse(preprocessedText)
         val rootToken = new Token(0, "", 0, 0, "", "")
-        val firstSentence = parsedText.sentences(0)
+        val firstSentence = parsedText.sentences.head
         val basicDeps = firstSentence.basicDependencies
 
         var tokens = firstSentence.tokens
@@ -29,17 +31,16 @@ class SentenceParsingAgent(client: TClient) {
             dependent.setGovernor(governor, dependencyType)
         })
 
-        return new Sentence(preprocessedText, tokens, basicDeps)
+        new Sentence(preprocessedText, tokens, basicDeps)
     }
 
     def parseMulti(text: String): List[Sentence] = {
-        val sentenceTexts = this.splitTextSentences(text)
-        return sentenceTexts.map(st ⇒ this.parse(st))
+        this.splitTextSentences(text).map(st ⇒ this.parse(st))
     }
 
     /**
       * Given a string of text, split into an array of sentences in the text
-      * @param text
+      * @param text Text to split into sentences
       */
     def splitTextSentences(text: String): List[String] = {
         val splitText = text.split(SENTENCE_SPLIT_REGEX_BASE)
@@ -47,10 +48,10 @@ class SentenceParsingAgent(client: TClient) {
         var sentences = List[String]()
         var currentSentence = splitText(0).replaceAll("^\\s+", "")
 
-        for (i ← 1 to splitText.length - 1) {
+        for (i ← 1 until splitText.length) {
             val chunk = splitText(i).replaceAll("^\\s+", "")
 
-            if (chunk.trim.length > 0 && SENTENCE_PUNCT_MATCH_REGEX.matcher(chunk).matches()) {
+            if (chunk.trim.length > 0 && chunk.`match`(SENTENCE_PUNCT_MATCH_REGEX) != null) {
                 currentSentence += chunk
             } else {
                 sentences :+= currentSentence
@@ -60,6 +61,6 @@ class SentenceParsingAgent(client: TClient) {
 
         sentences :+= currentSentence
 
-        return sentences
+        sentences
     }
 }

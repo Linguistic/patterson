@@ -83,17 +83,17 @@ object JacksonPOJO {
         private var refs: Array[String] = _
         private var examples: Array[Array[String]] = _
 
-        def getId(): String = this.id
+        def getId: String = this.id
         def setId(id: String): Unit = this.id = id
-        def getDescription(): String = this.description
+        def getDescription: String = this.description
         def setDescription(description: String): Unit = this.description = description
-        def getRegex(): String = this.regex
+        def getRegex: String = this.regex
         def setRegex(regex: String): Unit = this.regex = regex
-        def getStructures(): Array[String] = this.structures
-        def setStructures(structures: Array[String]) = this.structures = structures
-        def getRefs(): Array[String] = this.refs
-        def setRefs(refs: Array[String]) = this.refs = refs
-        def getExamples(): Array[Array[String]] = this.examples
+        def getStructures: Array[String] = this.structures
+        def setStructures(structures: Array[String]): Unit = this.structures = structures
+        def getRefs: Array[String] = this.refs
+        def setRefs(refs: Array[String]): Unit = this.refs = refs
+        def getExamples: Array[Array[String]] = this.examples
         def setExamples(examples: Array[Array[String]]): Unit = this.examples = examples
     }
 

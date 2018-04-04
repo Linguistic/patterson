@@ -7,6 +7,6 @@ import org.apache.commons.lang3.builder.{ReflectionToStringBuilder, ToStringStyl
 object Main {
     def main(args: Array[String]): Unit = {
         val p = new Patterson(new RemoteClient("http://localhost:9000", Language.CHINESE))
-        println(ReflectionToStringBuilder.toString(p.matchGrammar("天气越来越冷了")(0)(0), ToStringStyle.MULTI_LINE_STYLE))
+        println(ReflectionToStringBuilder.toString(p.matchGrammar("天气越来越冷了").head.head, ToStringStyle.MULTI_LINE_STYLE))
     }
 }

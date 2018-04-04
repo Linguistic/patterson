@@ -20,7 +20,7 @@ class GrammarPatternAgent(grammarPatternMap: Map[String, GrammarPattern]) {
         })
 
         // Render the matches to a list instead of a map
-        val allMatches = matches.map(_._2).flatten
+        val allMatches = matches.flatMap(_._2)
 
         // Loop through each match
         for (m ← matches) {
@@ -32,7 +32,7 @@ class GrammarPatternAgent(grammarPatternMap: Map[String, GrammarPattern]) {
             })
 
             // If we have unique matches, add those to our new map
-            if (filteredMatches.size > 0)
+            if (filteredMatches.nonEmpty)
                 filteredMatchesMap(m._1) = filteredMatches
         }
 
@@ -40,6 +40,6 @@ class GrammarPatternAgent(grammarPatternMap: Map[String, GrammarPattern]) {
         for (m ← filteredMatchesMap)
             grammarMatches :+= this.grammarPatternMap(m._1)
 
-        return grammarMatches
+        grammarMatches
     }
 }

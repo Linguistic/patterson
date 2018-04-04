@@ -13,7 +13,7 @@ object Edge {
                val ahead: Boolean = false,
                val behind: Boolean = false) {
 
-        val t: Pattern = Pattern.compile(s"^(${edgeType})$$")
+        val t: Pattern = Pattern.compile(s"^($edgeType)$$")
 
         private def matchesDependent(token: Token, dependent: Token): Boolean = {
             if (dependent.dependencyType == "ROOT") return false
@@ -22,7 +22,7 @@ object Edge {
             val aheadMatches = !this.ahead || token.index > dependent.index
             val behindMatches = !this.behind || token.index < dependent.index
 
-            return typeMatches && aheadMatches && behindMatches && this.childNode.matches(dependent)
+            typeMatches && aheadMatches && behindMatches && this.childNode.matches(dependent)
         }
 
         def matches(token: Token): Boolean = {

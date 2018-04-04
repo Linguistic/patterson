@@ -11,6 +11,6 @@ class Patterson(client: TClient) {
     private val gpa = new GrammarPatternAgent(grammarData.patterns)
 
     def matchGrammar(text: String): List[List[GrammarPattern]] = {
-        return this.spa.parseMulti(text).map(s ⇒ this.gpa.getMatchedPatterns(s))
+        this.spa.parseMulti(text).map(s ⇒ this.gpa.getMatchedPatterns(s))
     }
 }
