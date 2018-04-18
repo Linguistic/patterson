@@ -165,20 +165,21 @@ object RegexUtils {
         if (mergedMatches.nonEmpty) mergedMatches else null
     }
 
-//    def locFromToken(token: Token, matchCharsStr: String = null) : Location = {
-//        val baseLocation = Location(token.beginPosition, token.endPosition)
-//
-//        if (matchCharsStr.isEmpty)
-//            return baseLocation
-//
-//        val matchData = token.word.`match`(Pattern.compile(s"[${matchCharsStr}]+", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE))
-//
-//        if (matchData == null)
-//            return null
-//
+    def locationFromToken(token: Token, matchCharsStr: String = null) : Location = {
+        val baseLocation = Location(token.beginPosition, token.endPosition)
+
+        if (matchCharsStr.isEmpty)
+            return baseLocation
+
+        val matchData = token.word.`match`(Pattern.compile(s"[${matchCharsStr}]+", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE))
+
+        if (matchData == null)
+            return null
+
+        // TODO: come back to this
 //        baseLocation.start += matchData.index
-//        baseLocation.end = baseLocation.start + matchData[0].length;
-//
-//        return baseLocation;
-//    };
+        baseLocation.end = baseLocation.start + matchData.head.length
+
+        return baseLocation;
+    };
 }
