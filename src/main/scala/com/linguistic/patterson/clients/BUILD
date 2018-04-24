@@ -7,7 +7,7 @@ scala_library(
         "@com_fasterxml_jackson_core_jackson_core",
         "@com_fasterxml_jackson_core_jackson_databind",
         "@com_fasterxml_jackson_core_jackson_databind_yaml",
-        "@edu_stanford_nlp_standford_corenlp",
+        "@edu_stanford_nlp_stanford_corenlp",
         "models/corenlp",
         "util"
     )

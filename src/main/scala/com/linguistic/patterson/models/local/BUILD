@@ -3,7 +3,7 @@ scala_library(
     srcs = glob(["*.scala"]),
     visibility = ["//visibility:public"],
     deps = require(
-        "agents",
+#        "agents",
         "models/corenlp",
         "util",
     ),

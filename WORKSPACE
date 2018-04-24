@@ -29,7 +29,7 @@ scala_register_toolchains()
 
 # Core
 maven_jar(
-    name = "edu_stanford_nlp_standford_corenlp",
+    name = "edu_stanford_nlp_stanford_corenlp",
     artifact = "edu.stanford.nlp:stanford-corenlp:3.9.1",
     sha1 = "eaec753808f3c214755cbf1b1e57bb58bc448309",
 )

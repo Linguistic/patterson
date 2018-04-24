@@ -1,0 +1,8 @@
+directories:
+  src/main/scala/com/linguistic/patterson
+
+targets:
+  //src/main/scala/com/linguistic/patterson:patterson
+
+additional_languages:
+  scala
