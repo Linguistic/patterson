@@ -8,6 +8,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.linguistic.patterson.models.local.{ExampleSentence, GrammarPattern, Reference}
 import com.linguistic.patterson.util.JacksonPOJO.{YAMLGrammarData, YAMLReference}
 
+import scala.collection.mutable
+
 class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
     private val mapper = new ObjectMapper(new YAMLFactory())
     private val grammarPaths = getGrammarFilesInResourceDirectory(s"library/$targetLanguage/$sourceLanguage/")
@@ -26,7 +28,7 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
     val patterns: Map[String, GrammarPattern] = this.readGrammarFiles()
 
     private def readGrammarFiles(): Map[String, GrammarPattern] = {
-        var patterns: Map[String, GrammarPattern] = Map[String, GrammarPattern]()
+        var patterns = mutable.Map[String, GrammarPattern]()
 
         this.grammarPaths.foreach(path ⇒ {
             try {
@@ -35,22 +37,25 @@ class GrammarData(private var sourceLanguage: String, targetLanguage: String) {
                         new BufferedInputStream(
                             this.getClass.getResourceAsStream(path)
                         ),
-                        classOf[YAMLGrammarData])
+                        classOf[YAMLGrammarData]
+                    )
 
-                patterns += (data.getId() → new GrammarPattern(
-                    id = data.getId(),
-                    description = data.getDescription(),
-                    regex = data.getRegex(),
-                    structures = data.getStructures().toList,
-                    refs = data.getRefs().map(x ⇒ this.referenceMap.getOrElse(x, null)).toList,
-                    examples = data.getExamples().map(x ⇒ ExampleSentence(x(0), x(1), null)).toList
-                ))
+                patterns += (
+                    data.getId → new GrammarPattern(
+                        id = data.getId,
+                        description = data.getDescription,
+                        regex = data.getRegex,
+                        structures = data.getStructures.toList,
+                        refs = data.getRefs.map(x ⇒ this.referenceMap.getOrElse(x, null)).toList,
+                        examples = data.getExamples.map(x ⇒ ExampleSentence(x(0), x(1), null)).toList
+                    )
+                )
             } catch {
                 case e: Exception ⇒ e.printStackTrace()
             }
         })
 
-        patterns
+        patterns.toMap
     }
 
     private def getGrammarFilesInResourceDirectory(dir: String): List[String] = {

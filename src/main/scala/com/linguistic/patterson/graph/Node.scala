@@ -16,11 +16,12 @@ class Node(val filter: Token ⇒ Boolean = null, capture: Boolean = false, val e
         true
     }
 
-//    def getMatchLocations(token: Token): Unit = {
-//        if (!this.matches(token)) return null
-//
-//        val matchLocations = List[List[Location]]()
-//
+    def getMatchLocations(token: Token): List[Location] = {
+        if (!this.matches(token)) return null
+
+        val matchLocations = List[List[Location]]()
+
+        return List[Location]()
 //        if (this.capture) {
 //            val captureChars = if (this.capture) null else this.capture
 //            matchLocations.push(locFromToken(token, captureChars));
@@ -34,5 +35,5 @@ class Node(val filter: Token ⇒ Boolean = null, capture: Boolean = false, val e
 //            }
 //        }
 //        return matchLocs;
-//    }
+    }
 }
