@@ -108,7 +108,7 @@ object RegexUtils {
     false
   }
 
-  def matchesOverlap(match1: List[Location], match2: List[Location]): Boolean = {
+  private def matchesOverlap(match1: List[Location], match2: List[Location]): Boolean = {
     // TODO: improve speed complexity in following block
     for (location1 ← match1)
       for (location2 ← match2)
@@ -117,7 +117,7 @@ object RegexUtils {
     false
   }
 
-  def intersectMatches(match1: List[Location], match2: List[Location]): List[Location] = {
+  private def intersectMatches(match1: List[Location], match2: List[Location]): List[Location] = {
     val allLocations = (match1 ::: match2).sortWith((location1, location2) ⇒ (location1.start - location2.start) < 0)
     val locationQueue = mutable.Queue(allLocations: _*)
 
@@ -140,7 +140,7 @@ object RegexUtils {
     combinedMatch
   }
 
-  def unionMatches(match1: List[Location], match2: List[Location]): List[Location] = {
+  private def unionMatches(match1: List[Location], match2: List[Location]): List[Location] = {
     val allLocations = (match1 ::: match2).sortWith((location1, location2) ⇒ (location1.start - location2.start) < 0)
 
     var locationQueue = mutable.Queue(allLocations: _*)
@@ -167,7 +167,7 @@ object RegexUtils {
     combinedMatch
   }
 
-  def matchesEqual(match1: List[Location], match2: List[Location]): Boolean = {
+  private def matchesEqual(match1: List[Location], match2: List[Location]): Boolean = {
     if (match1.size != match2.size)
       return false
 
@@ -188,9 +188,10 @@ object RegexUtils {
     matchesEqual(matchA, matchB) && !matchesEqual(intersectMatches(matchA, matchB), matchA)
   }
 
-  def appendOrMergeMatch(matchesList: List[List[Location]],
-                         m: List[Location],
-                         conservative: Boolean): List[List[Location]] = {
+  private def appendOrMergeMatch(matchesList: List[List[Location]],
+                                 m: List[Location],
+                                 conservative: Boolean): List[List[Location]] = {
+
     var updatedMatchesList = List[List[Location]](matchesList: _*)
 
     for ((existingMatch, index) ← updatedMatchesList.view.zipWithIndex) {
@@ -238,7 +239,7 @@ object RegexUtils {
   def locationFromToken(token: Token, matchCharsStr: String = null): Location = {
     val baseLocation = Location(token.beginPosition, token.endPosition)
 
-    if (matchCharsStr.isEmpty)
+    if (matchCharsStr == null)
       return baseLocation
 
     val matchData =

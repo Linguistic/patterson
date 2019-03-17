@@ -6,6 +6,7 @@ scala_library(
         "data/references",
         "models/corenlp",
         "models/local",
+        "graph",
         "util"
     ),
 )

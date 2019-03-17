@@ -7,8 +7,8 @@ class GrammarPattern(val id: String,
                      val structures: List[String],
                      val description: String,
                      val refs: List[Reference],
-                     val regex: String,
-                     val examples: List[ExampleSentence]) {
+                     val examples: List[ExampleSentence],
+                     val regex: String = null) {
 
   def matches(sentence: Sentence): List[List[Location]] = {
     throw new Error("No matcher implemented")
