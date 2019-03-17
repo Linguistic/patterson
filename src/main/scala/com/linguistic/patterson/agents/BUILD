@@ -5,6 +5,7 @@ scala_library(
     deps = require(
         "@edu_stanford_nlp_stanford_corenlp",
         "clients",
+        "data/patterns",
         "models/local",
         "models/corenlp",
         "util"

@@ -1,8 +1,10 @@
 directories:
+  .
   src/main/scala/com/linguistic/patterson
 
 targets:
   //src/main/scala/com/linguistic/patterson:patterson
+  //src/main/scala/com/linguistic/patterson/models/corenlp:corenlp
 
 additional_languages:
   scala

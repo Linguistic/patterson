@@ -1,9 +1,10 @@
 scala_library(
-    name = "local",
+    name = "patterns",
     srcs = glob(["*.scala"]),
     visibility = ["//visibility:public"],
     deps = require(
-        "models/corenlp",
-        "util",
+      "constants",
+      "data/patterns/zh",
+      "models/local",
     ),
 )

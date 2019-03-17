@@ -1,9 +1,6 @@
 scala_library(
-    name = "local",
+    name = "references",
     srcs = glob(["*.scala"]),
     visibility = ["//visibility:public"],
-    deps = require(
-        "models/corenlp",
-        "util",
-    ),
+    deps = require("models/local"),
 )

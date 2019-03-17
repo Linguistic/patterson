@@ -7,6 +7,7 @@ scala_library(
         "@com_fasterxml_jackson_core_jackson_databind_yaml",
         "@com_fasterxml_jackson_core_jackson_databind",
         "@org_apache_commons_commons_lang3",
+        "@org_yaml_snakeyaml",
         "agents",
         "constants",
         "clients",

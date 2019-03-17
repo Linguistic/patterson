@@ -2,6 +2,8 @@
 #     SCALA    #
 ################
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 # Version (commit from bazelbuild/rules_scala)
 rules_scala_version = "4ecc3f7d1f74ade8962dc627457fd3629ada1c5e"  # Scala 2.12
 

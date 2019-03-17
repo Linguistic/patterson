@@ -1,0 +1,14 @@
+---
+id: yuelaiyue
+description: >
+  The character 才 (cái) can be used to emphasize that a number is small, or less than expected.
+regex: (越来越)[^了]+(了)
+matcher: com.linguistic.patterson.matchers.BasicMatcher
+structures:
+  - Subj. + 越来越 + Adj. + 了
+  - Subj. + 越来越 + Verb + 了
+refs:
+  - asl
+examples:
+  - - 天气越来越冷了。
+    - The weather is getting colder and colder.

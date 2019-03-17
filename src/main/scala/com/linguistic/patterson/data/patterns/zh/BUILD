@@ -1,9 +1,11 @@
 scala_library(
-    name = "local",
+    name = "zh",
     srcs = glob(["*.scala"]),
     visibility = ["//visibility:public"],
     deps = require(
+        "data/references",
         "models/corenlp",
-        "util",
+        "models/local",
+        "util"
     ),
 )
